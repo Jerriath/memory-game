@@ -8,7 +8,8 @@ const App = () => {
 
   useEffect(() => {
     getCards(4).then(result => setPokemon(result))
-  }, [])
+  },
+  [])
 
   return (
     <div className="cardHolder">
