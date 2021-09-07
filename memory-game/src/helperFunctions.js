@@ -1,22 +1,72 @@
+import Card from "./components/Card";
+import uniqId from "uniqid";
 
 
+export async function getCards(quantity) {
+    try{
+        let values = getRandNums(quantity);
+        let pokemonArray = [];
+        for (let i = 0; i < quantity; i++) {
+            let newPokemon = await getPokemon(values[i]);
+            pokemonArray.push(newPokemon);
+        }
+        let cardsArray = generateCards(pokemonArray);
+        return cardsArray;     
+    }
+    catch(error) {
+        console.log(error);
+        return null;
+    }
+}
 
-export async function testFunc() {
+async function getPokemon(index) {
     const Pokedex = require("pokeapi-js-wrapper");
     const P = new Pokedex.Pokedex();
 
     try{
-        let pokemon = await P.getPokemonByName(15);
+        let pokemon = await P.getPokemonByName(index);
         let idk = {
             name: pokemon.name,
             img: pokemon.sprites.front_default,
-
+            test: pokemon.forms[0].url,
         }
+        console.log(pokemon);
         return idk;    
     }
     catch(error){
         console.log(error);
         return null;
     }
-
 }
+
+function generateCards(pokemonArray) {
+    let cardsArray = [];
+    for (let i = 0; i < pokemonArray.length; i++) {
+        let newCard = createCard(pokemonArray[i]);
+        cardsArray.push(newCard);
+    }
+    return cardsArray;
+}
+
+function createCard(pokemon) {
+    let newCard = <Card pokemon={pokemon} key={uniqId()} />;
+    return newCard;
+}
+
+function getRandNums(quantity) {
+    let maxArray = [];
+    for (let j of range(1, 898)) {
+        maxArray.push(j);
+    }
+    let returnArray = [];
+    for (let i = 0; i < quantity; i ++) {
+        let randIndex = Math.floor(Math.random() * 898);
+        returnArray.push(...maxArray.splice(randIndex, 1));
+    }
+    console.log(returnArray);
+    return returnArray;
+}
+
+function range(start, end) {
+    return Array(end - start + 1).fill().map((_, idx) => start + idx)
+  }

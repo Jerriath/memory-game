@@ -1,7 +1,7 @@
+import "./componentStyles.css";
 
 
-
-const Card = (pokemon) => {
+const Card = (pokemon, key) => {
 
     let name = null;
     let imgSrc = null;
@@ -17,9 +17,9 @@ const Card = (pokemon) => {
     
 
     return (
-        <div>
-            <h1>{name}</h1>
-            <img alt="your mom" src={imgSrc} />
+        <div key={key} className="card">
+            <h1 className="cardTitle">{name}</h1>
+            <img className="cardImg" alt="your mom" src={imgSrc} />
         </div>
     )
     
