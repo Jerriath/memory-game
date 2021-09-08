@@ -1,27 +1,28 @@
 import "./componentStyles.css";
+import React from "react";
 
 
-const Card = (pokemon, key) => {
+const Card = (props) => {
 
     let name = null;
     let imgSrc = null;
-    if (pokemon.pokemon === null) {
+    if (props.pokemon === null) {
         name = "";
         imgSrc = "";
     }
     else {
-        console.log(pokemon);
-        name = pokemon.pokemon.name;
-        imgSrc = pokemon.pokemon.img;
+        name = props.pokemon.name;
+        imgSrc = props.pokemon.img;
     }
-    
 
-    return (
-        <div key={key} className="card">
+    let newCard = (
+        <div id={props.id} className="card" >
             <h1 className="cardTitle">{name}</h1>
             <img className="cardImg" alt="your mom" src={imgSrc} />
         </div>
-    )
+    );
+
+    return newCard;
     
 }
 
