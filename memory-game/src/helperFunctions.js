@@ -12,3 +12,15 @@ export function fillFalse(array) {
         array[i] = false;
     }
 }
+
+export function displayLoading() {
+    console.log("loading");
+    let loadingScreen = document.getElementById("loadingScreen");
+    loadingScreen.style.display = "block";
+}
+
+export function removeLoading() {
+    console.log("unloading");
+    let loadingScreen = document.getElementById("loadingScreen");
+    loadingScreen.style.display = "none";
+}

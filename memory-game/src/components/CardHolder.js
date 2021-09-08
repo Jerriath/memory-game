@@ -1,7 +1,8 @@
 import "./componentStyles.css"
 import { getCards, shuffle } from "../cardFunctions.js";
-import { checkClicked, fillFalse } from "../helperFunctions.js";
+import { checkClicked, fillFalse, displayLoading, removeLoading } from "../helperFunctions.js";
 import React, { useState, useEffect } from "react";
+import LoadingScreen from "./LoadingScreen";
 
 
 const CardHolder = () => {
@@ -14,7 +15,7 @@ const CardHolder = () => {
   
   //This useEffect statement should only be called once when the component is mounted (since there are no dependencies)
   useEffect(() => {
-    getCards(level * 2 + 4).then(result => shuffle(result)).then(array => setPokemon(array))
+    getCards(level * 2 + 4).then(result => shuffle(result)).then(array => setPokemon(array)).then(() => {removeLoading()})
   }, [level])
 
   //This useEffect is responsible for setting up event Listeners for on click events on all the pokemon cards (set card to clicked and shuffles)
@@ -33,6 +34,7 @@ const CardHolder = () => {
           setPokemon([]);
           setPokemon(shuffle(pokemonArray));
           if (checkClicked(clickedArray)) {
+            displayLoading();
             let newLevel = level + 1;
             setLevel(newLevel);
             let length = newLevel * 2 + 4;
@@ -57,6 +59,7 @@ const CardHolder = () => {
 
   return (
     <div className="cardHolder">
+      <LoadingScreen />
       {pokemon}
     </div>
   );
