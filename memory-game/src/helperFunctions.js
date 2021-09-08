@@ -6,3 +6,9 @@ export function checkClicked(array) {
     }
     return true;
 }
+
+export function fillFalse(array) {
+    for (let i = 0; i < array.length; i++) {
+        array[i] = false;
+    }
+}
