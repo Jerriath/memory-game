@@ -1,21 +1,28 @@
 import "./componentStyles.css"
 import { getCards, shuffle } from "../cardFunctions.js";
-import { checkClicked, fillFalse, displayLoading, removeLoading } from "../helperFunctions.js";
+import { checkClicked, fillFalse, displayLoading, removeLoading, displayLose, removeLose } from "../helperFunctions.js";
 import React, { useState, useEffect } from "react";
 import LoadingScreen from "./LoadingScreen";
+import LoseScreen from "./LoseScreen";
 
 
-const CardHolder = () => {
+const CardHolder = (props) => {
 
   const [pokemon, setPokemon] = useState([]);
   const [clicked, setClicked] = useState([false, false, false, false]);
   const [level, setLevel] = useState(0);
-  const [score, setScore] = useState(0);
 
   
   //This useEffect statement should only be called once when the component is mounted (since there are no dependencies)
   useEffect(() => {
-    getCards(level * 2 + 4).then(result => shuffle(result)).then(array => setPokemon(array)).then(() => {removeLoading()})
+    if (level === null) {
+      setLevel(0);
+      getCards(4).then(result => shuffle(result)).then(array => setPokemon(array)).then(() => {removeLoading()})
+    }
+    else {
+      getCards(level * 2 + 4).then(result => shuffle(result)).then(array => setPokemon(array)).then(() => {removeLoading()})
+    }
+    
   }, [level])
 
   //This useEffect is responsible for setting up event Listeners for on click events on all the pokemon cards (set card to clicked and shuffles)
@@ -26,8 +33,11 @@ const CardHolder = () => {
         let clickedArray = clicked;
         if (clickedArray[i] === false) {
           clickedArray[i] = true;
-          let newScore = score + 1;
-          setScore(newScore);
+          let newScore = props.score + 1;
+          props.setScore(newScore);
+          if (newScore > props.best) {
+            props.setBest(newScore);
+          }
           console.log(newScore);
           setClicked(clickedArray);
           let pokemonArray = pokemon;
@@ -45,8 +55,9 @@ const CardHolder = () => {
           }    
         }
         else {
-          setLevel(0);
-          setScore(0);
+          displayLose();
+          setLevel(null);
+          props.setScore(0);
           setClicked([false, false, false, false]);
           console.log(0);
         }
@@ -60,6 +71,7 @@ const CardHolder = () => {
   return (
     <div className="cardHolder">
       <LoadingScreen />
+      <LoseScreen best={props.best} />
       {pokemon}
     </div>
   );

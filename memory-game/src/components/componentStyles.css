@@ -5,6 +5,10 @@
     padding: 0;
 }
 
+
+
+
+/*Styling for pokemon cards*/
 .cardHolder {
     margin: auto;
     width: 80%;
@@ -41,6 +45,10 @@
     height: auto;
 }
 
+
+
+
+/*Styling for loading screen*/
 .loadingScreen {
     margin: 0;
     background-color: rgb(136, 100, 100);
@@ -57,4 +65,92 @@
     width: 100px;
     height: 100px;
     z-index: 100;
+}
+
+
+
+
+/*Styling for lose screen*/
+.loseScreen {
+    margin: 0;
+    background-color: rgb(136, 100, 100);
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    top: 0; bottom: 0; left: 0; right: 0;
+    text-align: center;
+}
+
+.msgHolder {
+    position: fixed;
+    top: 0; bottom: 0; right: 0; left:0;
+    margin: auto;
+    height: 300px;
+    width: 430px;
+    font-size: 25px;
+    text-align: center;
+    background-color: rgb(26, 75, 34);
+    padding: 15px;
+    border-radius: 20px;
+    color: rgb(224, 224, 224);
+}
+
+.loseMsg {
+    text-decoration: underline;
+}
+
+.restart {
+    height: 50px;
+    width: 150px;
+    margin-top: 80px;
+    border-radius: 10px;
+    border: 0px;
+    box-shadow: 2px 2px 2px black;
+    font-size: 20px;
+    color: rgb(224, 224, 224);
+    background-color: rgb(136, 100, 100);
+    cursor: pointer;
+    transition: all 0.1s linear;
+}
+
+.restart:hover {
+    box-shadow: 5px 5px 5px black;
+    height: 60px;
+    width: 170px;
+    border: 2px solid rgb(51, 255, 51);
+}
+
+
+
+
+/*Styling for the Header*/
+.title {
+    font-size: 3em;
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0;
+    padding: 0% 3%;
+    background-color:rgb(26, 75, 34);
+    color: rgb(224, 224, 224);
+    height: 10%;
+    align-items: center;
+}
+
+.scoreBoard {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 65%;
+}
+
+h2 {
+    margin: 0;
+}
+
+h1 {
+    margin: 0;
 }

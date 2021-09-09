@@ -24,3 +24,14 @@ export function removeLoading() {
     let loadingScreen = document.getElementById("loadingScreen");
     loadingScreen.style.display = "none";
 }
+
+export function displayLose() {
+    console.log("Lost");
+    let loseScreen = document.getElementById("loseScreen");
+    loseScreen.style.display = "block";
+}
+
+export function removeLose() {
+    let loseScreen = document.getElementById("loseScreen");
+    loseScreen.style.display = "none";
+}
